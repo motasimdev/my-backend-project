@@ -1,4 +1,5 @@
 const express = require("express");
+const bcrypt = require("bcrypt");
 const userSchema = require("../../model/userSchema");
 const passwordValidation = require("../../helpers/passwordValidation");
 const emailValidation = require("../../helpers/emailValidation");
@@ -23,11 +24,12 @@ async function signupController(req, res) {
     if (!passwordValidation(password)) {
       return res.send("vai password valid hy nai");
     }
+    const hash = await bcrypt.hash(password, 10);
 
     const users = new userSchema({
       name,
       email,
-      password,
+      password: hash,
     });
     await users.save();
     res.status(201).json({
@@ -41,7 +43,7 @@ async function signupController(req, res) {
       details: error.message,
       success: true,
       message: "User created",
-      data: user,
+      data: users,
     });
   }
 }

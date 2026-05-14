@@ -1,7 +1,7 @@
 const express = require("express");
+const bcrypt = require("bcrypt");
 require("dotenv").config();
 const dbConnection = require("./database/dbConnection");
-const bcrypt = require("bcrypt");
 const User = require("./model/userSchema");
 const route = require("./route");
 const app = express();
