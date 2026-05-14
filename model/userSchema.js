@@ -18,11 +18,10 @@ const userSchema = new Schema({
   },
   otp: {
     type: String,
-    required: true,
   },
   isVerified: {
     type: Boolean,
-    default: false
+    default: false,
   },
 });
 
