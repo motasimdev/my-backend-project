@@ -55,6 +55,7 @@ async function signupController(req, res) {
 
     // otp banano and expire kora
 
+    // new user create with schema call
     const users = new userSchema({
       name,
       email,
@@ -62,6 +63,7 @@ async function signupController(req, res) {
       otp: otp,
       otpExpire: otpExpire,
     });
+    // new user create with schema call
 
     //email verification
     emailVerfication(email, otp);
