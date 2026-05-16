@@ -18,7 +18,6 @@ async function signupController(req, res) {
     }
     if (!email) {
       return res.send("vai email to khali!");
-      // aladavabe field gulo khali rakhar error
     }
     if (!password) {
       return res.send("vai password to khali!");
