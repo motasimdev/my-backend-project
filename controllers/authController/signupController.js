@@ -1,5 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 const userSchema = require("../../model/userSchema");
 const passwordValidation = require("../../helpers/passwordValidation");
 const emailValidation = require("../../helpers/emailValidation");
@@ -23,31 +24,42 @@ async function signupController(req, res) {
     }
     // aladavabe field gulo khali rakhar error
 
-    // email r pass regex diye validate 
+    // email r pass regex diye validate
     if (!emailValidation(email)) {
       return res.send("vai valid email den!");
     }
     if (!passwordValidation(password)) {
       return res.send("vai password strong hy nai");
     }
-    // email r pass regex diye validate 
+    // email r pass regex diye validate
 
     // duplicate email validate findOne er maddhome
     const duplicateEmail = await userSchema.findOne({ email });
-    
+
     if (duplicateEmail) {
       return res.json({
-        messege: "Email Already Exist"
-      })
+        messege: "Email Already Exist",
+      });
     }
     // duplicate email validate findOne er maddhome
 
     // password hash kora
     const hash = await bcrypt.hash(password, 10);
+    // password hash kora
+
+    // otp banano and expire kora
+    const otp = crypto.randomInt(100000, 999999).toString();
+
+    const otpExpire = new Date(Date.now() + 10 * 60 * 1000);
+    
+    // otp banano and expire kora
+
     const users = new userSchema({
       name,
       email,
       password: hash,
+      otp: otp,
+      otpExpire: otpExpire,
     });
     await users.save();
     res.status(201).json({

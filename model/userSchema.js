@@ -5,13 +5,15 @@ const userSchema = new Schema({
   name: {
     type: String,
     required: true,
-    lowarcase: true,
+    lowercase: true,
     trim: true,
   },
   email: {
     type: String,
     required: true,
     unique: true,
+    lowercase: true,
+    trim: true,
   },
   password: {
     type: String,
@@ -19,6 +21,9 @@ const userSchema = new Schema({
   },
   otp: {
     type: String,
+  },
+  otpExpire: {
+    type: Date,
   },
   isVerified: {
     type: Boolean,
