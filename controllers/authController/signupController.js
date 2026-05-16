@@ -28,7 +28,7 @@ async function signupController(req, res) {
       return res.send("vai valid email den!");
     }
     if (!passwordValidation(password)) {
-      return res.send("vai password valid hy nai");
+      return res.send("vai password strong hy nai");
     }
     // email r pass regex diye validate 
 
@@ -59,9 +59,6 @@ async function signupController(req, res) {
     res.status(500).json({
       error: "সার্ভারে সমস্যা হয়েছে!",
       details: error.message,
-      success: false,
-      message: "server error",
-      data: users,
     });
   }
 }
