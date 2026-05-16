@@ -4,6 +4,7 @@ const crypto = require("crypto");
 const userSchema = require("../../model/userSchema");
 const passwordValidation = require("../../helpers/passwordValidation");
 const emailValidation = require("../../helpers/emailValidation");
+const emailVerfication = require("../../helpers/emailVerification");
 const router = express.Router();
 
 async function signupController(req, res) {
@@ -38,7 +39,7 @@ async function signupController(req, res) {
 
     if (duplicateEmail) {
       return res.json({
-        messege: "Email Already Exist",
+        message: "Email Already Exist",
       });
     }
     // duplicate email validate findOne er maddhome
@@ -51,7 +52,7 @@ async function signupController(req, res) {
     const otp = crypto.randomInt(100000, 999999).toString();
 
     const otpExpire = new Date(Date.now() + 10 * 60 * 1000);
-    
+
     // otp banano and expire kora
 
     const users = new userSchema({
@@ -61,6 +62,11 @@ async function signupController(req, res) {
       otp: otp,
       otpExpire: otpExpire,
     });
+
+    //email verification
+    emailVerfication(email, otp);
+    //email verification
+
     await users.save();
     res.status(201).json({
       message: "অ্যাকাউন্ট তৈরি সফল হয়েছে!",
