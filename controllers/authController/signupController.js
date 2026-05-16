@@ -32,15 +32,15 @@ async function signupController(req, res) {
     }
     // email r pass regex diye validate 
 
-    // duplicate email validate kora findOne er maddhome
+    // duplicate email validate findOne er maddhome
     const duplicateEmail = await userSchema.findOne({ email });
     
-    if (duplicateEmail.length > 0) {
+    if (duplicateEmail) {
       return res.json({
         messege: "Email Already Exist"
       })
     }
-    // duplicate email validate kora
+    // duplicate email validate findOne er maddhome
 
     // password hash kora
     const hash = await bcrypt.hash(password, 10);
@@ -59,8 +59,8 @@ async function signupController(req, res) {
     res.status(500).json({
       error: "সার্ভারে সমস্যা হয়েছে!",
       details: error.message,
-      success: true,
-      message: "User created",
+      success: false,
+      message: "server error",
       data: users,
     });
   }
