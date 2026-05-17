@@ -38,6 +38,17 @@ async function otpController(req, res) {
     message: "Email Verification Done",
   });
 }
+async function resendOtpController(req, res) {
+  const { email } = req.body;
+  console.log("otp ashse");
 
+  const resendUser = await userSchema.findOne({ email });
+  if (!resendUser) {
+    return res.json({
+      message: "email not found",
+    });
+  }
+  res.send("dafdafadfa");
+}
 
-module.exports  = otpController
+module.exports = { otpController, resendOtpController };
