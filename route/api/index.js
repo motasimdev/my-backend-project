@@ -1,11 +1,8 @@
 const express = require("express");
-const router = express.Router()
-const authentication = require('./auth')
-const shop = require('./shop');
-const otpController = require("../../controllers/otpController/otpController");
-
+const router = express.Router();
+const authentication = require("./auth");
 
 // router.use("/shop", shop)
-router.use("/auth", authentication)
-router.use("/otpverify", otpController)
-module.exports = router
+router.use("/auth", authentication);
+
+module.exports = router;

@@ -20,9 +20,10 @@ async function emailVerfication(email, otp) {
       html: `<h1>Your OTP is: ${otp}</h1>`, // HTML body
     });
 
-    console.log("Message sent: %s", info.messageId);
+    // console.log("Message sent: %s", info.messageId);
+    
     // Preview URL is only available when using an Ethereal test account
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
   } catch (err) {
     console.error("Error while sending mail:", err);
   }
