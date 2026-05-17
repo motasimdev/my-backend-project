@@ -51,7 +51,6 @@ async function signupController(req, res) {
     const otp = crypto.randomInt(100000, 999999).toString();
 
     const otpExpire = new Date(Date.now() + 10 * 60 * 1000);
-
     // otp banano and expire kora
 
     // new user create with schema call

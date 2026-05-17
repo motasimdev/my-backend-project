@@ -1,4 +1,5 @@
 const userSchema = require("../../model/userSchema");
+const crypto = require("crypto");
 
 async function otpController(req, res) {
   const { email, otp } = req.body;
@@ -32,6 +33,7 @@ async function otpController(req, res) {
   user.isVerified = true;
   user.otp = undefined;
   user.otpExpire = undefined;
+
   await user.save();
 
   res.status(200).json({
@@ -40,15 +42,26 @@ async function otpController(req, res) {
 }
 async function resendOtpController(req, res) {
   const { email } = req.body;
-  console.log("otp ashse");
 
-  const resendUser = await userSchema.findOne({ email });
-  if (!resendUser) {
+  const resendOtp = await userSchema.findOne({ email });
+  if (!resendOtp) {
     return res.json({
       message: "email not found",
     });
   }
-  res.send("dafdafadfa");
+  // otp banano and expire kora
+  const otp = crypto.randomInt(100000, 999999).toString();
+  const otpExpire = new Date(Date.now() + 10 * 60 * 1000);
+  // otp banano and expire kora
+
+  resendOtp.otp = otp;
+  resendOtp.otpExpire = otpExpire;
+
+  await resendOtp.save();
+
+  res.status(200).json({
+    message: "Resend OTP Success",
+  });
 }
 
 module.exports = { otpController, resendOtpController };
