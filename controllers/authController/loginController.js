@@ -44,7 +44,9 @@ async function loginController(req, res) {
   //     });
   //   }
 
-  res.send("Done");
+  res.json({
+    message: "login Success"
+  });
 }
 
 module.exports = loginController;

@@ -40,6 +40,7 @@ async function otpController(req, res) {
     message: "Email Verification Done",
   });
 }
+
 async function resendOtpController(req, res) {
   const { email } = req.body;
 
