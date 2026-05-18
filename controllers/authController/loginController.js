@@ -28,13 +28,13 @@ async function loginController(req, res) {
 
   const duplicateUser = await userSchema.findOne({ email });
 
-  // email diye signup hoise ki na sheta check
+  // email diye signup hoise ki na sheta check - eta 1st e rakhte hbe nahle server crash krbe
   if (!duplicateUser) {
     return res.json({
       error: "Email Not Found",
     });
   }
-  // email diye signup hoise ki na sheta check
+  // email diye signup hoise ki na sheta check - eta 1st e rakhte hbe nahle server crash krbe
 
   // email diye signup krar por verify hoise ki na sheta check
   if (!duplicateUser.isVerified) {
@@ -54,9 +54,39 @@ async function loginController(req, res) {
   }
   // password hash compare kora
 
+  //session
+  // console.log(req.session)
+  req.session.isAuth = true;
+  req.session.duplicateUser = {
+    id: duplicateUser.id,
+    name: duplicateUser.name,
+    email: duplicateUser.email,
+  };
+  //session
+
   res.json({
     message: "login Success",
   });
 }
 
-module.exports = loginController;
+function dashboardController(req, res) {
+  return res.json({
+    message: "this is dashboard",
+  });
+}
+
+function logoutController(req, res) {
+  req.session.destroy(function (err) {
+    if (err) {
+      return res.json({
+        err: "Something Wrong",
+      });
+    } else {
+      return res.json({
+        message: "Logout Successful",
+      });
+    }
+  });
+}
+
+module.exports = { loginController, dashboardController, logoutController };
