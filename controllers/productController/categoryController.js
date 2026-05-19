@@ -39,6 +39,11 @@ async function categoryController(req, res) {
 }
 
 async function getAllCategory(req, res) {
-    const allCategoryList = await categorySchema.find({})
+  const allCategoryList = await categorySchema.find({});
+  res.json({
+    message: "All Category",
+    data: allCategoryList,
+  });
 }
-module.exports = categoryController;
+
+module.exports = { categoryController, getAllCategory };
