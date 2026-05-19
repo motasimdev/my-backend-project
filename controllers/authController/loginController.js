@@ -69,12 +69,15 @@ async function loginController(req, res) {
   });
 }
 
+//dashboard function
 function dashboardController(req, res) {
   return res.json({
     message: "this is dashboard",
   });
 }
+//dashboard function
 
+//logout function
 function logoutController(req, res) {
   req.session.destroy(function (err) {
     if (err) {
@@ -88,5 +91,6 @@ function logoutController(req, res) {
     }
   });
 }
+//logout function
 
 module.exports = { loginController, dashboardController, logoutController };
