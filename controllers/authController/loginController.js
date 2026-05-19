@@ -54,6 +54,9 @@ async function loginController(req, res) {
   }
   // password hash compare kora
 
+  // if roll jdi user hy tahole *** tuku dekhaba else kisu dekhabana
+  // if roll jdi admin hy tahole dashboard dekhaba else homepage e niye jaba
+ 
   //session
   // console.log(req.session)
   req.session.isAuth = true;

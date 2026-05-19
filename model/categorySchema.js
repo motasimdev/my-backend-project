@@ -5,6 +5,8 @@ const categorySchema = new Schema({
   title: {
     type: String,
     trim: true,
+    unique: true,
+    required: true,
   },
   description: {
     type: String,
@@ -12,4 +14,4 @@ const categorySchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("category", categorySchema);
+module.exports = mongoose.model("Category", categorySchema);

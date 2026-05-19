@@ -34,7 +34,7 @@ async function signupController(req, res) {
     // email r pass regex diye validate
 
     // duplicate email validate findOne er maddhome
-    const duplicateEmail = await userSchema.findOne({ email });
+    const duplicateEmail = await userSchema.findOne({ email }); 
 
     if (duplicateEmail) {
       return res.json({
