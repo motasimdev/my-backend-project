@@ -9,6 +9,7 @@ const app = express();
 const port = 3000;
 app.use(express.json());
 
+//session
 app.use(
   session({
     secret: "motasimEcommerce",
@@ -17,6 +18,7 @@ app.use(
     cookie: { secure: false },
   }),
 );
+//session
 
 // app.post("/user", (req, res) => {
 //   const { name, email, password } = req.body;
