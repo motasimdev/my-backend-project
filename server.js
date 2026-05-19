@@ -14,8 +14,15 @@ app.use(
   session({
     secret: "motasimEcommerce",
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false },
+    saveUninitialized: true, // ২০২৬ স্ট্যান্ডার্ড অনুযায়ী false রাখা ভালো
+    // store: MongoStore.create({
+    //   mongoUrl: "mongodb://localhost:27017/motasimEcom", // 👈 তোমার মঙ্গোডিবি ইউআরএল দাও
+    //   collectionName: "sessions", // ডাটাবেসে sessions নামে একটা টেবিল/কালেকশন তৈরি হবে
+    // }),
+    cookie: {
+      secure: false,
+      // maxAge: 24 * 60 * 60 * 1000, // কুকি ১ দিন টিকে থাকবে
+    },
   }),
 );
 //session
