@@ -2,28 +2,28 @@ const categorySchema = require("../../model/categorySchema");
 
 async function categoryController(req, res) {
   try {
-    const { title, description } = req.body;
+    const { name, description } = req.body;
 
     // khali field validate
-    if (!title) {
+    if (!name) {
       return res.json({
-        error: "vai title field khali",
+        error: "vai name field khali",
       });
     }
     // khali field validate
 
-    const existingTitle = await categorySchema.findOne({ title });
+    const existingName = await categorySchema.findOne({ name });
 
     //existing title validate
-    if (existingTitle) {
+    if (existingName) {
       return res.json({
-        error: "vai ei title to ekbar disen",
+        error: "vai ei name to ekbar disen",
       });
     }
     //existing title validate
 
     const createCategory = categorySchema({
-      title,
+      name,
       description,
     });
     await createCategory.save();
@@ -38,6 +38,7 @@ async function categoryController(req, res) {
   }
 }
 
+// ============ get all category list ======================
 async function getAllCategory(req, res) {
   const allCategoryList = await categorySchema.find({});
   res.json({
@@ -45,5 +46,6 @@ async function getAllCategory(req, res) {
     data: allCategoryList,
   });
 }
+// ============ get all category list ======================
 
 module.exports = { categoryController, getAllCategory };
