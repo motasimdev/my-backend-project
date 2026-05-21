@@ -7,10 +7,15 @@ const categorySchema = new Schema({
     trim: true,
     unique: true,
     required: true,
+    lowercase: true,
   },
   description: {
     type: String,
     trim: true,
+  },
+  subcategorylist: {
+    type: mongoose.Schema.Types.ObjectId,
+    reference: "Subcategory",
   },
 });
 
